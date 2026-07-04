@@ -2,147 +2,354 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <title>Majlis Perasmian</title>
+  <title>Perasmian Penutupan Simposium Kebangsaan Pendidikan Manusiawi Kali Pertama Tahun 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 30%),
+        linear-gradient(135deg, #06162f, #0b3a78, #123f82);
       color: white;
+      overflow-x: hidden;
+    }
+
+    .page {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 22px;
+    }
+
+    .main-card {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 92vh;
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 34px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      backdrop-filter: blur(14px);
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .header {
       text-align: center;
+      margin-bottom: 18px;
     }
 
-    .container {
-      width: 92%;
-      max-width: 850px;
-      background: rgba(255,255,255,0.12);
-      padding: 30px;
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      font-size: 34px;
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-weight: normal;
-      margin-top: 0;
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
       color: #dbeafe;
     }
 
-    .signature-box {
-      background: white;
-      border-radius: 18px;
-      padding: 15px;
-      margin-top: 25px;
+    h1 {
+      margin: 0 auto;
+      max-width: 930px;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.22;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      font-size: clamp(16px, 2vw, 22px);
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
+    .signature-area {
+      margin-top: 20px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: inset 0 0 0 2px rgba(15,23,42,0.06), 0 20px 40px rgba(0,0,0,0.18);
     }
 
     canvas {
       width: 100%;
-      height: 300px;
-      background: white;
-      border-radius: 12px;
+      height: 360px;
+      display: block;
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #bfdbfe, #ffffff) border-box;
+      border-radius: 20px;
+      border: 2px solid transparent;
       touch-action: none;
       cursor: crosshair;
     }
 
+    .status-panel {
+      margin: 22px auto 0;
+      text-align: center;
+    }
+
     .status {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
       color: #fef3c7;
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
     }
 
     .timer {
-      margin-top: 8px;
-      font-size: 18px;
-      color: #bfdbfe;
+      margin-top: 10px;
+      color: #dbeafe;
+      font-size: 16px;
+      font-weight: 500;
     }
 
-    .button-row {
-      margin-top: 22px;
+    .bottom-bar {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    button {
-      padding: 15px 28px;
-      margin: 8px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
+    .ip-section {
+      text-align: left;
+      opacity: 0.85;
     }
 
-    .reset {
-      background: #f97316;
-      color: white;
-    }
-
-    .test {
-      background: #16a34a;
-      color: white;
+    .ip-section label {
+      display: block;
+      font-size: 12px;
+      color: #dbeafe;
+      margin-bottom: 5px;
     }
 
     .ip-input {
-      margin-top: 18px;
-      padding: 10px;
-      width: 230px;
-      border-radius: 8px;
-      border: none;
+      width: 160px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.9);
+      color: #0f172a;
       text-align: center;
-      font-size: 16px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .note {
-      font-size: 14px;
+    .admin-link {
+      background: rgba(255,255,255,0.14);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .admin-link:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .admin-card {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .admin-card h2 {
+      margin-top: 0;
+      font-size: 32px;
+    }
+
+    .admin-input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      border: none;
+      margin: 10px 0;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+
+    .admin-button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      margin: 9px 0;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      color: white;
+    }
+
+    .login-btn {
+      background: #2563eb;
+    }
+
+    .reset-btn {
+      background: #f97316;
+    }
+
+    .test-btn {
+      background: #16a34a;
+    }
+
+    .off-btn {
+      background: #dc2626;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .admin-note {
       color: #dbeafe;
-      margin-top: 15px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    #adminPage {
+      display: none;
+    }
+
+    #adminControls {
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      .main-card {
+        min-height: 94vh;
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      canvas {
+        height: 320px;
+      }
+
+      .bottom-bar {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .ip-section {
+        text-align: center;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Majlis Perasmian</h1>
-    <h2>Sila tandatangan pada ruang di bawah</h2>
+  <!-- PAGE UTAMA -->
+  <section id="mainPage" class="page">
+    <div class="main-card">
 
-    <input class="ip-input" id="ip" value="192.168.201.131">
+      <div>
+        <div class="header">
+          <div class="badge">MAJLIS RASMI</div>
 
-    <div class="signature-box">
-      <canvas id="signatureCanvas"></canvas>
+          <h1>
+            Perasmian Penutupan Simposium Kebangsaan Pendidikan Manusiawi Kali Pertama Tahun 2026
+          </h1>
+
+          <div class="subtitle">
+            Sila tandatangan pada ruangan di bawah
+          </div>
+        </div>
+
+        <div class="signature-area">
+          <canvas id="signatureCanvas"></canvas>
+        </div>
+
+        <div class="status-panel">
+          <div class="status" id="status">Menunggu tandatangan perasmi</div>
+          <div class="timer" id="timer">Lampu akan menyala selepas 5 saat tandatangan dimulakan</div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="ip-section">
+          <label>IP ESP32</label>
+          <input class="ip-input" id="ip" value="192.168.201.131">
+        </div>
+
+        <button class="admin-link" onclick="bukaAdmin()">Admin</button>
+      </div>
+
     </div>
+  </section>
 
-    <div class="status" id="status">Status: Menunggu tandatangan perasmi</div>
-    <div class="timer" id="timer">Lampu akan menyala selepas 5 saat tandatangan dimulakan</div>
+  <!-- PAGE ADMIN -->
+  <section id="adminPage" class="page">
+    <div class="admin-card">
+      <h2>Admin</h2>
 
-    <div class="button-row">
-      <button class="reset" onclick="resetMajlis()">RESET</button>
-      <button class="test" onclick="hidupkanLampu()">TEST LAMPU</button>
+      <div id="adminLogin">
+        <p class="admin-note">Masukkan password admin untuk reset dan test lampu.</p>
+        <input class="admin-input" type="password" id="adminPassword" placeholder="Password Admin">
+        <button class="admin-button login-btn" onclick="loginAdmin()">MASUK</button>
+      </div>
+
+      <div id="adminControls">
+        <input class="admin-input" id="adminIp" value="192.168.201.131">
+
+        <button class="admin-button reset-btn" onclick="resetMajlis()">RESET MAJLIS</button>
+        <button class="admin-button test-btn" onclick="testLampu()">TEST LAMPU</button>
+        <button class="admin-button off-btn" onclick="matikanLampu()">MATIKAN LAMPU</button>
+
+        <p class="admin-note" id="adminStatus">Status admin: Sedia</p>
+      </div>
+
+      <button class="admin-button back-btn" onclick="kembaliUtama()">KEMBALI KE PAPARAN UTAMA</button>
     </div>
-
-    <div class="note">
-      Pastikan peranti ini dan ESP32 berada pada WiFi yang sama.<br>
-      IP ESP32 boleh ditukar pada kotak di atas jika berubah.
-    </div>
-  </div>
+  </section>
 
   <script>
+    const ADMIN_PASSWORD = "admin2026";
+
     const canvas = document.getElementById("signatureCanvas");
     const ctx = canvas.getContext("2d");
+
     const statusText = document.getElementById("status");
     const timerText = document.getElementById("timer");
+    const ipInput = document.getElementById("ip");
+    const adminIpInput = document.getElementById("adminIp");
+    const adminStatus = document.getElementById("adminStatus");
 
     let isDrawing = false;
     let sudahMula = false;
@@ -152,17 +359,49 @@
 
     function resizeCanvas() {
       const rect = canvas.getBoundingClientRect();
+
+      const savedImage = canvas.toDataURL();
+
       canvas.width = rect.width;
       canvas.height = rect.height;
 
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 5;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
-      ctx.strokeStyle = "#111827";
+      ctx.strokeStyle = "#0f172a";
+
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = savedImage;
     }
 
-    window.addEventListener("load", resizeCanvas);
+    window.addEventListener("load", () => {
+      resizeCanvas();
+      syncIP();
+    });
+
     window.addEventListener("resize", resizeCanvas);
+
+    function syncIP() {
+      const savedIP = localStorage.getItem("esp32_ip");
+
+      if (savedIP) {
+        ipInput.value = savedIP;
+        adminIpInput.value = savedIP;
+      }
+
+      ipInput.addEventListener("input", () => {
+        localStorage.setItem("esp32_ip", ipInput.value.trim());
+        adminIpInput.value = ipInput.value.trim();
+      });
+
+      adminIpInput.addEventListener("input", () => {
+        localStorage.setItem("esp32_ip", adminIpInput.value.trim());
+        ipInput.value = adminIpInput.value.trim();
+      });
+    }
 
     function getPosition(e) {
       const rect = canvas.getBoundingClientRect();
@@ -223,7 +462,8 @@
 
     function mulaKiraanDetik() {
       masaBaki = 5;
-      statusText.innerText = "Status: Tandatangan sedang direkodkan";
+
+      statusText.innerText = "Tandatangan sedang direkodkan";
       timerText.innerText = "Lampu akan menyala dalam " + masaBaki + " saat";
 
       countdownInterval = setInterval(() => {
@@ -241,15 +481,23 @@
       if (sudahSelesai) return;
 
       sudahSelesai = true;
-      statusText.innerText = "Status: Perasmian selesai";
+
+      statusText.innerText = "Perasmian selesai";
       timerText.innerText = "Lampu sedang dihidupkan...";
 
       hidupkanLampu();
       ucapTerimaKasih();
     }
 
+    function getIP() {
+      const ip = ipInput.value.trim();
+      localStorage.setItem("esp32_ip", ip);
+      adminIpInput.value = ip;
+      return ip;
+    }
+
     function hidupkanLampu() {
-      const ip = document.getElementById("ip").value.trim();
+      const ip = getIP();
       const url = "http://" + ip + "/on";
 
       fetch(url)
@@ -258,18 +506,55 @@
           timerText.innerText = "Lampu telah menyala";
         })
         .catch(error => {
-          timerText.innerText = "Gagal hantar arahan. Cuba buka terus: " + url;
+          timerText.innerText = "Arahan dihantar. Jika lampu tidak menyala, semak sambungan WiFi.";
+          window.open(url, "_blank");
+        });
+    }
+
+    function matikanLampu() {
+      const ip = adminIpInput.value.trim();
+      localStorage.setItem("esp32_ip", ip);
+      ipInput.value = ip;
+
+      const url = "http://" + ip + "/off";
+
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          adminStatus.innerText = "Status admin: Lampu dimatikan";
+        })
+        .catch(error => {
+          adminStatus.innerText = "Status admin: Gagal matikan lampu";
+          window.open(url, "_blank");
+        });
+    }
+
+    function testLampu() {
+      const ip = adminIpInput.value.trim();
+      localStorage.setItem("esp32_ip", ip);
+      ipInput.value = ip;
+
+      const url = "http://" + ip + "/on";
+
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          adminStatus.innerText = "Status admin: Test lampu berjaya";
+        })
+        .catch(error => {
+          adminStatus.innerText = "Status admin: Gagal test lampu";
           window.open(url, "_blank");
         });
     }
 
     function ucapTerimaKasih() {
-      const teks = "Terima kasih. Majlis perasmian telah disempurnakan.";
+      const teks = "Terima kasih. Perasmian penutupan Simposium Kebangsaan Pendidikan Manusiawi Kali Pertama Tahun 2026 telah disempurnakan.";
 
       const suara = new SpeechSynthesisUtterance(teks);
       suara.lang = "ms-MY";
-      suara.rate = 0.9;
-      suara.pitch = 1;
+      suara.rate = 0.88;
+      suara.pitch = 0.9;
+      suara.volume = 1;
 
       speechSynthesis.cancel();
       speechSynthesis.speak(suara);
@@ -285,11 +570,36 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      statusText.innerText = "Status: Menunggu tandatangan perasmi";
+      statusText.innerText = "Menunggu tandatangan perasmi";
       timerText.innerText = "Lampu akan menyala selepas 5 saat tandatangan dimulakan";
 
-      const ip = document.getElementById("ip").value.trim();
-      fetch("http://" + ip + "/off").catch(() => {});
+      matikanLampu();
+
+      if (adminStatus) {
+        adminStatus.innerText = "Status admin: Majlis telah direset";
+      }
+    }
+
+    function bukaAdmin() {
+      document.getElementById("mainPage").style.display = "none";
+      document.getElementById("adminPage").style.display = "flex";
+    }
+
+    function kembaliUtama() {
+      document.getElementById("adminPage").style.display = "none";
+      document.getElementById("mainPage").style.display = "flex";
+    }
+
+    function loginAdmin() {
+      const password = document.getElementById("adminPassword").value;
+
+      if (password === ADMIN_PASSWORD) {
+        document.getElementById("adminLogin").style.display = "none";
+        document.getElementById("adminControls").style.display = "block";
+        adminStatus.innerText = "Status admin: Login berjaya";
+      } else {
+        alert("Password salah.");
+      }
     }
   </script>
 
