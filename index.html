@@ -20,9 +20,9 @@
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 24%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.16), transparent 24%),
         radial-gradient(circle at top right, rgba(255,255,255,0.10), transparent 20%),
-        linear-gradient(135deg, #06142b 0%, #0c3972 48%, #0a2f62 100%);
+        linear-gradient(135deg, #06142b 0%, #0b3972 48%, #082f63 100%);
       color: white;
     }
 
@@ -40,13 +40,14 @@
       width: min(1280px, 100%);
       height: calc(100vh - 28px);
       border-radius: 32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.08));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.075));
       border: 1px solid rgba(255,255,255,0.20);
       box-shadow: 0 30px 80px rgba(0,0,0,0.30);
       backdrop-filter: blur(16px);
       display: flex;
       flex-direction: column;
-      padding: 16px 22px 16px;
+      padding: 12px 22px 14px;
       position: relative;
       overflow: hidden;
     }
@@ -57,7 +58,8 @@
       align-items: center;
       gap: 10px;
       flex-shrink: 0;
-      margin-bottom: 4px;
+      margin-bottom: 0;
+      min-height: 40px;
     }
 
     .top-left,
@@ -65,7 +67,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      min-width: 110px;
+      min-width: 120px;
     }
 
     .top-right {
@@ -93,48 +95,35 @@
     .hero {
       flex-shrink: 0;
       text-align: center;
-      margin-top: 2px;
-      margin-bottom: 10px;
+      margin-top: -2px;
+      margin-bottom: 6px;
     }
 
     .logo-wrap {
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
     .logo-wrap img {
-      height: clamp(60px, 9vh, 95px);
+      height: clamp(78px, 10vh, 118px);
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.18));
-    }
-
-    .event-badge {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.08);
-      color: #dbeafe;
-      font-size: 12px;
-      letter-spacing: 0.8px;
-      font-weight: 600;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.20));
     }
 
     h1 {
       margin: 0 auto;
-      max-width: 980px;
-      font-size: clamp(24px, 3.35vw, 50px);
-      line-height: 1.14;
+      max-width: 1000px;
+      font-size: clamp(22px, 2.85vw, 42px);
+      line-height: 1.15;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.35px;
       text-shadow: 0 5px 20px rgba(0,0,0,0.22);
     }
 
     .subtitle {
-      margin-top: 8px;
+      margin-top: 6px;
       color: #e0f2fe;
-      font-size: clamp(16px, 1.7vw, 23px);
+      font-size: clamp(15px, 1.45vw, 20px);
       font-weight: 500;
     }
 
@@ -152,7 +141,8 @@
       flex-direction: column;
       background: rgba(255,255,255,0.96);
       border-radius: 28px;
-      padding: 14px;
+      padding: 12px;
+      margin-top: 2px;
       box-shadow:
         inset 0 0 0 1px rgba(15,23,42,0.08),
         0 20px 40px rgba(0,0,0,0.18);
@@ -160,7 +150,7 @@
 
     .signature-inner {
       flex: 1;
-      min-height: 0;
+      min-height: 300px;
       background: #ffffff;
       border-radius: 22px;
       border: 2px solid #dbe4ef;
@@ -173,7 +163,7 @@
       height: 100%;
       display: block;
       background:
-        linear-gradient(180deg, rgba(248,250,252,0.55), rgba(255,255,255,0.95));
+        linear-gradient(180deg, rgba(248,250,252,0.60), rgba(255,255,255,0.98));
       cursor: crosshair;
       touch-action: none;
     }
@@ -186,26 +176,26 @@
 
     .status-pill {
       display: inline-block;
-      padding: 10px 24px;
+      padding: 9px 24px;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.22);
       color: #fef3c7;
-      font-size: clamp(15px, 1.5vw, 21px);
+      font-size: clamp(15px, 1.45vw, 20px);
       font-weight: 700;
     }
 
     .timer {
-      margin-top: 6px;
-      font-size: 14px;
+      margin-top: 5px;
+      font-size: 13px;
       color: #dbeafe;
       font-weight: 500;
-      min-height: 22px;
+      min-height: 20px;
     }
 
     .bottom-bar {
       flex-shrink: 0;
-      margin-top: 10px;
+      margin-top: 8px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: end;
@@ -218,7 +208,7 @@
 
     .ip-section label {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       margin-bottom: 4px;
       color: #dbeafe;
       opacity: 0.95;
@@ -250,14 +240,14 @@
       height: 16px;
       border-radius: 50%;
       background: #dc2626;
-      border: 2px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,255,255,0.85);
       box-shadow: 0 0 10px rgba(220,38,38,0.85);
       transition: 0.25s ease;
     }
 
     .lamp-dot.on {
       background: #22c55e;
-      box-shadow: 0 0 14px rgba(34,197,94,0.9);
+      box-shadow: 0 0 14px rgba(34,197,94,0.95);
     }
 
     .bottom-right {
@@ -320,9 +310,64 @@
     .reset-btn { background: #f97316; }
     .test-btn  { background: #16a34a; }
     .off-btn   { background: #dc2626; }
-    .back-btn  {
+
+    .back-btn {
       background: rgba(255,255,255,0.16);
       border: 1px solid rgba(255,255,255,0.28);
+    }
+
+    .celebration {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.28), rgba(0,25,60,0.76));
+      z-index: 9999;
+      pointer-events: none;
+      animation: fadeIn 0.7s ease;
+    }
+
+    .glow-ring {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 6px solid rgba(255,255,255,0.9);
+      box-shadow:
+        0 0 35px rgba(255,255,255,0.9),
+        0 0 90px rgba(59,130,246,0.95),
+        0 0 150px rgba(34,197,94,0.75);
+      animation: pulseRing 1.6s ease-in-out infinite;
+    }
+
+    .success-text {
+      position: relative;
+      font-size: clamp(38px, 6vw, 82px);
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow:
+        0 0 18px rgba(255,255,255,0.9),
+        0 0 35px rgba(59,130,246,0.95);
+      letter-spacing: 2px;
+      animation: zoomText 1.2s ease;
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.75); opacity: 0.75; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.75); opacity: 0.75; }
+    }
+
+    @keyframes zoomText {
+      from { transform: scale(0.4); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     #adminPage,
@@ -332,12 +377,8 @@
 
     @media (max-width: 900px) {
       .main-card {
-        padding: 14px 14px 14px;
+        padding: 12px 14px 12px;
         border-radius: 24px;
-      }
-
-      .top-bar {
-        margin-bottom: 2px;
       }
 
       .top-left,
@@ -372,20 +413,16 @@
 
     @media (max-height: 760px) {
       .logo-wrap img {
-        height: 58px;
-      }
-
-      .event-badge {
-        margin-bottom: 5px;
+        height: 76px;
       }
 
       h1 {
-        font-size: clamp(22px, 3vw, 38px);
+        font-size: clamp(21px, 2.65vw, 38px);
       }
 
       .subtitle {
-        font-size: 16px;
-        margin-top: 5px;
+        font-size: 15px;
+        margin-top: 4px;
       }
 
       .status-pill {
@@ -394,17 +431,31 @@
       }
 
       .timer {
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .main-card {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .top-bar {
+        min-height: 36px;
+      }
+
+      .signature-inner {
+        min-height: 285px;
       }
     }
   </style>
 </head>
+
 <body>
+
+  <div id="celebration" class="celebration">
+    <div class="glow-ring"></div>
+    <div class="success-text">TERIMA KASIH</div>
+  </div>
 
   <!-- PAPARAN UTAMA -->
   <section id="mainPage" class="page">
@@ -422,14 +473,16 @@
         <div class="logo-wrap">
           <img
             src="https://raw.githubusercontent.com/ictlshaks-wq/LOGODGURU/main/Logo%20KPM%20Putih.png"
-            alt="Logo KPM Putih">
+            alt="Logo KPM">
         </div>
 
-        <div class="event-badge">MAJLIS RASMI</div>
+        <h1>
+          Perasmian Penutupan Simposium Kebangsaan Pendidikan Manusiawi Kali Pertama Tahun 2026
+        </h1>
 
-        <h1>Perasmian Penutupan Simposium Kebangsaan Pendidikan Manusiawi Kali Pertama Tahun 2026</h1>
-
-        <div class="subtitle">Sila tandatangan pada ruangan di bawah</div>
+        <div class="subtitle">
+          Sila tandatangan pada ruangan di bawah
+        </div>
       </div>
 
       <div class="content-flex">
@@ -500,6 +553,7 @@
     const adminIpInput = document.getElementById("adminIp");
     const adminStatus = document.getElementById("adminStatus");
     const lampDot = document.getElementById("lampDot");
+    const celebration = document.getElementById("celebration");
 
     let isDrawing = false;
     let sudahMula = false;
@@ -646,6 +700,7 @@
 
       hidupkanLampu();
       ucapTerimaKasih();
+      animasiSelesai();
     }
 
     function getIP() {
@@ -723,6 +778,14 @@
       speechSynthesis.speak(suara);
     }
 
+    function animasiSelesai() {
+      celebration.style.display = "flex";
+
+      setTimeout(() => {
+        celebration.style.display = "none";
+      }, 4300);
+    }
+
     function resetMajlis() {
       clearInterval(countdownInterval);
 
@@ -735,6 +798,8 @@
 
       statusText.innerText = "Menunggu tandatangan perasmi";
       timerText.innerText = "Sistem akan diaktifkan selepas 5 saat tandatangan dimulakan";
+
+      celebration.style.display = "none";
 
       matikanLampu();
 
@@ -751,6 +816,7 @@
     function kembaliUtama() {
       document.getElementById("adminPage").style.display = "none";
       document.getElementById("mainPage").style.display = "flex";
+      setTimeout(resizeCanvas, 100);
     }
 
     function loginAdmin() {
