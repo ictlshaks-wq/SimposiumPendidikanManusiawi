@@ -17,8 +17,8 @@
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 30%),
-        linear-gradient(135deg, #06162f, #0b3a78, #123f82);
+        radial-gradient(circle at top left, rgba(255,255,255,0.22), transparent 28%),
+        linear-gradient(135deg, #04152f, #0b3a78, #123f82);
       color: white;
       overflow-x: hidden;
     }
@@ -28,45 +28,72 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 22px;
+      padding: 18px;
     }
 
     .main-card {
       width: 100%;
-      max-width: 1100px;
-      min-height: 92vh;
+      max-width: 1180px;
+      min-height: 94vh;
       background: rgba(255, 255, 255, 0.11);
       border: 1px solid rgba(255,255,255,0.22);
       border-radius: 34px;
       box-shadow: 0 30px 80px rgba(0,0,0,0.35);
       backdrop-filter: blur(14px);
-      padding: 34px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+    }
+
+    .top-actions {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .small-btn {
+      background: rgba(255,255,255,0.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 9px 15px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .small-btn:hover {
+      background: rgba(255,255,255,0.24);
     }
 
     .header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-top: 25px;
+      margin-bottom: 16px;
     }
 
     .badge {
       display: inline-block;
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.25);
-      padding: 8px 18px;
+      padding: 7px 18px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
       letter-spacing: 0.5px;
-      margin-bottom: 14px;
+      margin-bottom: 13px;
       color: #dbeafe;
     }
 
     h1 {
       margin: 0 auto;
-      max-width: 930px;
-      font-size: clamp(26px, 4vw, 44px);
+      max-width: 980px;
+      font-size: clamp(25px, 3.6vw, 42px);
       line-height: 1.22;
       font-weight: 800;
       color: #ffffff;
@@ -74,58 +101,56 @@
     }
 
     .subtitle {
-      margin-top: 14px;
-      font-size: clamp(16px, 2vw, 22px);
+      margin-top: 13px;
+      font-size: clamp(16px, 1.8vw, 21px);
       color: #e0f2fe;
       font-weight: 500;
     }
 
     .signature-area {
-      margin-top: 20px;
+      margin-top: 18px;
       background: #ffffff;
       border-radius: 28px;
-      padding: 18px;
+      padding: 16px;
       box-shadow: inset 0 0 0 2px rgba(15,23,42,0.06), 0 20px 40px rgba(0,0,0,0.18);
     }
 
     canvas {
       width: 100%;
-      height: 360px;
+      height: 390px;
       display: block;
-      background:
-        linear-gradient(#ffffff, #ffffff) padding-box,
-        linear-gradient(135deg, #bfdbfe, #ffffff) border-box;
+      background: white;
       border-radius: 20px;
-      border: 2px solid transparent;
+      border: 2px solid #e2e8f0;
       touch-action: none;
       cursor: crosshair;
     }
 
     .status-panel {
-      margin: 22px auto 0;
+      margin: 18px auto 0;
       text-align: center;
     }
 
     .status {
       display: inline-block;
-      padding: 12px 26px;
+      padding: 11px 24px;
       border-radius: 999px;
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fef3c7;
-      font-size: clamp(16px, 2vw, 22px);
+      font-size: clamp(15px, 1.8vw, 21px);
       font-weight: 700;
     }
 
     .timer {
-      margin-top: 10px;
+      margin-top: 8px;
       color: #dbeafe;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
     }
 
     .bottom-bar {
-      margin-top: 20px;
+      margin-top: 16px;
       display: flex;
       justify-content: space-between;
       align-items: end;
@@ -140,37 +165,62 @@
 
     .ip-section label {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       color: #dbeafe;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .ip-input {
-      width: 160px;
-      padding: 8px 10px;
-      border-radius: 10px;
+      width: 145px;
+      padding: 7px 9px;
+      border-radius: 9px;
       border: 1px solid rgba(255,255,255,0.35);
       background: rgba(255,255,255,0.9);
       color: #0f172a;
       text-align: center;
-      font-size: 13px;
+      font-size: 12px;
       font-family: 'Poppins', sans-serif;
+    }
+
+    .lamp-indicator-wrap {
+      text-align: center;
+      flex: 1;
+    }
+
+    .lamp-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #dc2626;
+      box-shadow: 0 0 10px rgba(220,38,38,0.75);
+      border: 2px solid rgba(255,255,255,0.8);
+      transition: 0.25s;
+    }
+
+    .lamp-dot.on {
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34,197,94,0.9);
+    }
+
+    .lamp-label {
+      display: block;
+      margin-top: 5px;
+      font-size: 11px;
+      color: #dbeafe;
+      opacity: 0.8;
     }
 
     .admin-link {
       background: rgba(255,255,255,0.14);
       color: #ffffff;
       border: 1px solid rgba(255,255,255,0.3);
-      padding: 10px 18px;
+      padding: 9px 17px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.25s;
-    }
-
-    .admin-link:hover {
-      background: rgba(255,255,255,0.25);
+      font-family: 'Poppins', sans-serif;
     }
 
     .admin-card {
@@ -214,21 +264,10 @@
       color: white;
     }
 
-    .login-btn {
-      background: #2563eb;
-    }
-
-    .reset-btn {
-      background: #f97316;
-    }
-
-    .test-btn {
-      background: #16a34a;
-    }
-
-    .off-btn {
-      background: #dc2626;
-    }
+    .login-btn { background: #2563eb; }
+    .reset-btn { background: #f97316; }
+    .test-btn { background: #16a34a; }
+    .off-btn { background: #dc2626; }
 
     .back-btn {
       background: rgba(255,255,255,0.16);
@@ -257,8 +296,18 @@
         border-radius: 24px;
       }
 
+      .top-actions {
+        position: static;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .header {
+        margin-top: 0;
+      }
+
       canvas {
-        height: 320px;
+        height: 340px;
       }
 
       .bottom-bar {
@@ -269,15 +318,24 @@
       .ip-section {
         text-align: center;
       }
+
+      .lamp-indicator-wrap {
+        order: 3;
+        width: 100%;
+        flex: none;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- PAGE UTAMA -->
   <section id="mainPage" class="page">
     <div class="main-card">
+
+      <div class="top-actions">
+        <button class="small-btn" onclick="paparanPenuh()">Paparan Penuh</button>
+      </div>
 
       <div>
         <div class="header">
@@ -298,7 +356,7 @@
 
         <div class="status-panel">
           <div class="status" id="status">Menunggu tandatangan perasmi</div>
-          <div class="timer" id="timer">Lampu akan menyala selepas 5 saat tandatangan dimulakan</div>
+          <div class="timer" id="timer">Sistem akan diaktifkan selepas 5 saat tandatangan dimulakan</div>
         </div>
       </div>
 
@@ -308,19 +366,23 @@
           <input class="ip-input" id="ip" value="192.168.201.131">
         </div>
 
+        <div class="lamp-indicator-wrap">
+          <span id="lampDot" class="lamp-dot"></span>
+          <span class="lamp-label">Status peranti</span>
+        </div>
+
         <button class="admin-link" onclick="bukaAdmin()">Admin</button>
       </div>
 
     </div>
   </section>
 
-  <!-- PAGE ADMIN -->
   <section id="adminPage" class="page">
     <div class="admin-card">
       <h2>Admin</h2>
 
       <div id="adminLogin">
-        <p class="admin-note">Masukkan password admin untuk reset dan test lampu.</p>
+        <p class="admin-note">Masukkan password admin untuk reset dan test.</p>
         <input class="admin-input" type="password" id="adminPassword" placeholder="Password Admin">
         <button class="admin-button login-btn" onclick="loginAdmin()">MASUK</button>
       </div>
@@ -329,8 +391,8 @@
         <input class="admin-input" id="adminIp" value="192.168.201.131">
 
         <button class="admin-button reset-btn" onclick="resetMajlis()">RESET MAJLIS</button>
-        <button class="admin-button test-btn" onclick="testLampu()">TEST LAMPU</button>
-        <button class="admin-button off-btn" onclick="matikanLampu()">MATIKAN LAMPU</button>
+        <button class="admin-button test-btn" onclick="testLampu()">TEST</button>
+        <button class="admin-button off-btn" onclick="matikanLampu()">OFF</button>
 
         <p class="admin-note" id="adminStatus">Status admin: Sedia</p>
       </div>
@@ -350,6 +412,7 @@
     const ipInput = document.getElementById("ip");
     const adminIpInput = document.getElementById("adminIp");
     const adminStatus = document.getElementById("adminStatus");
+    const lampDot = document.getElementById("lampDot");
 
     let isDrawing = false;
     let sudahMula = false;
@@ -357,9 +420,26 @@
     let countdownInterval;
     let masaBaki = 5;
 
+    function paparanPenuh() {
+      const elem = document.documentElement;
+
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function setLampuIndicator(status) {
+      if (status === "on") {
+        lampDot.classList.add("on");
+      } else {
+        lampDot.classList.remove("on");
+      }
+    }
+
     function resizeCanvas() {
       const rect = canvas.getBoundingClientRect();
-
       const savedImage = canvas.toDataURL();
 
       canvas.width = rect.width;
@@ -380,6 +460,7 @@
     window.addEventListener("load", () => {
       resizeCanvas();
       syncIP();
+      setLampuIndicator("off");
     });
 
     window.addEventListener("resize", resizeCanvas);
@@ -464,11 +545,11 @@
       masaBaki = 5;
 
       statusText.innerText = "Tandatangan sedang direkodkan";
-      timerText.innerText = "Lampu akan menyala dalam " + masaBaki + " saat";
+      timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
 
       countdownInterval = setInterval(() => {
         masaBaki--;
-        timerText.innerText = "Lampu akan menyala dalam " + masaBaki + " saat";
+        timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
 
         if (masaBaki <= 0) {
           clearInterval(countdownInterval);
@@ -483,7 +564,7 @@
       sudahSelesai = true;
 
       statusText.innerText = "Perasmian selesai";
-      timerText.innerText = "Lampu sedang dihidupkan...";
+      timerText.innerText = "Terima kasih.";
 
       hidupkanLampu();
       ucapTerimaKasih();
@@ -503,10 +584,10 @@
       fetch(url)
         .then(response => response.text())
         .then(data => {
-          timerText.innerText = "Lampu telah menyala";
+          setLampuIndicator("on");
         })
         .catch(error => {
-          timerText.innerText = "Arahan dihantar. Jika lampu tidak menyala, semak sambungan WiFi.";
+          setLampuIndicator("on");
           window.open(url, "_blank");
         });
     }
@@ -521,10 +602,12 @@
       fetch(url)
         .then(response => response.text())
         .then(data => {
-          adminStatus.innerText = "Status admin: Lampu dimatikan";
+          setLampuIndicator("off");
+          adminStatus.innerText = "Status admin: OFF";
         })
         .catch(error => {
-          adminStatus.innerText = "Status admin: Gagal matikan lampu";
+          setLampuIndicator("off");
+          adminStatus.innerText = "Status admin: Arahan OFF dihantar";
           window.open(url, "_blank");
         });
     }
@@ -539,10 +622,12 @@
       fetch(url)
         .then(response => response.text())
         .then(data => {
-          adminStatus.innerText = "Status admin: Test lampu berjaya";
+          setLampuIndicator("on");
+          adminStatus.innerText = "Status admin: Test dihantar";
         })
         .catch(error => {
-          adminStatus.innerText = "Status admin: Gagal test lampu";
+          setLampuIndicator("on");
+          adminStatus.innerText = "Status admin: Arahan test dihantar";
           window.open(url, "_blank");
         });
     }
@@ -571,7 +656,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       statusText.innerText = "Menunggu tandatangan perasmi";
-      timerText.innerText = "Lampu akan menyala selepas 5 saat tandatangan dimulakan";
+      timerText.innerText = "Sistem akan diaktifkan selepas 5 saat tandatangan dimulakan";
 
       matikanLampu();
 
