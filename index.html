@@ -686,59 +686,65 @@
       return ip;
     }
 
-    function hidupkanLampu() {
-      const ip = getIP();
-      const url = "http://" + ip + "/on";
+    function hantarArahanESP32(arahan, callback) {
+      const ip = ipInput.value.trim();
+      localStorage.setItem("esp32_ip", ip);
+      adminIpInput.value = ip;
 
-      fetch(url)
-        .then(response => response.text())
-        .then(() => {
-          setLampuIndicator("on");
-        })
-        .catch(() => {
-          setLampuIndicator("on");
-          window.open(url, "_blank");
-        });
+      const url = "http://" + ip + "/" + arahan + "?t=" + Date.now();
+
+      const img = new Image();
+
+      img.onload = function () {
+        if (callback) callback();
+      };
+
+      img.onerror = function () {
+        // Walaupun browser baca sebagai error, arahan biasanya sudah sampai ke ESP32.
+        if (callback) callback();
+      };
+
+      img.src = url;
+    }
+
+    function hantarArahanAdmin(arahan, callback) {
+      const ip = adminIpInput.value.trim();
+      localStorage.setItem("esp32_ip", ip);
+      ipInput.value = ip;
+
+      const url = "http://" + ip + "/" + arahan + "?t=" + Date.now();
+
+      const img = new Image();
+
+      img.onload = function () {
+        if (callback) callback();
+      };
+
+      img.onerror = function () {
+        if (callback) callback();
+      };
+
+      img.src = url;
+    }
+
+    function hidupkanLampu() {
+      hantarArahanESP32("on", function () {
+        setLampuIndicator("on");
+      });
     }
 
     function matikanLampu() {
-      const ip = adminIpInput.value.trim();
-      localStorage.setItem("esp32_ip", ip);
-      ipInput.value = ip;
-
-      const url = "http://" + ip + "/off";
-
-      fetch(url)
-        .then(response => response.text())
-        .then(() => {
-          setLampuIndicator("off");
-          adminStatus.innerText = "Status admin: OFF";
-        })
-        .catch(() => {
-          setLampuIndicator("off");
-          adminStatus.innerText = "Status admin: Arahan OFF dihantar";
-          window.open(url, "_blank");
-        });
+      hantarArahanAdmin("off", function () {
+        setLampuIndicator("off");
+        adminStatus.innerText = "Status admin: OFF";
+      });
     }
 
     function testLampu() {
-      const ip = adminIpInput.value.trim();
-      localStorage.setItem("esp32_ip", ip);
-      ipInput.value = ip;
-
-      const url = "http://" + ip + "/on";
-
-      fetch(url)
-        .then(response => response.text())
-        .then(() => {
-          setLampuIndicator("on");
-          adminStatus.innerText = "Status admin: Test dihantar";
-        })
-        .catch(() => {
-          setLampuIndicator("on");
-          adminStatus.innerText = "Status admin: Arahan test dihantar";
-          window.open(url, "_blank");
-        });
+      hantarArahanAdmin("on", function () {
+        setLampuIndicator("on");
+        adminStatus.innerText = "Status admin: Test dihantar";
+      });
     }
 
     function ucapTerimaKasih() {
