@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
   <style>
     * {
@@ -46,7 +47,7 @@
       backdrop-filter: blur(16px);
       padding: 10px 22px 12px;
       display: grid;
-      grid-template-rows: 6px auto minmax(0, 1fr) auto auto;
+      grid-template-rows: 4px auto minmax(0, 1fr) auto auto;
       gap: 6px;
       overflow: hidden;
       position: relative;
@@ -54,7 +55,7 @@
 
     .top-bar {
       display: block;
-      min-height: 6px;
+      min-height: 8px;
     }
 
     .small-btn {
@@ -93,8 +94,8 @@
 
     h1 {
       margin: 0 auto;
-      max-width: 1050px;
-      font-size: clamp(22px, 2.8vw, 40px);
+      max-width: 1000px;
+      font-size: clamp(20px, 2.35vw, 34px);
       line-height: 1.15;
       font-weight: 800;
       letter-spacing: -0.35px;
@@ -104,7 +105,7 @@
     .subtitle {
       margin-top: 5px;
       color: #e0f2fe;
-      font-size: clamp(14px, 1.35vw, 19px);
+      font-size: clamp(13px, 1.15vw, 17px);
       font-weight: 500;
     }
 
@@ -120,9 +121,10 @@
       min-height: 0;
       background: #ffffff;
       border-radius: 28px;
-      border: 10px solid #ffffff;
+      border: 14px solid #ffffff;
       overflow: hidden;
       display: flex;
+      position: relative;
       box-shadow:
         0 0 0 2px rgba(219, 228, 239, 0.95),
         0 20px 40px rgba(0,0,0,0.18);
@@ -138,18 +140,70 @@
       touch-action: none;
     }
 
+    .officiant-info {
+      text-align: center;
+      padding: 3px 10px 0;
+      line-height: 1.15;
+      min-height: 26px;
+    }
+
+    .officiant-line {
+      font-size: clamp(11px, 1.05vw, 15px);
+      font-weight: 600;
+      color: #e0f2fe;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.22);
+    }
+
+    .officiant-line strong {
+      color: #ffffff;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
     .status-panel {
       text-align: center;
-      min-height: 42px;
+      min-height: 62px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
+    .countdown-row {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-number {
+      display: none;
+      font-size: clamp(28px, 4.2vw, 48px);
+      line-height: 1;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow:
+        0 0 14px rgba(255,255,255,0.45),
+        0 0 26px rgba(254,243,199,0.50);
+      animation: pulseNumber 1s ease-in-out infinite;
+    }
+
+    .countdown-number.show {
+      display: block;
+    }
+
+    @keyframes pulseNumber {
+      0% { transform: scale(0.94); opacity: 0.82; }
+      50% { transform: scale(1.06); opacity: 1; }
+      100% { transform: scale(0.94); opacity: 0.82; }
+    }
+
     .status-pill {
       display: inline-block;
-      padding: 8px 24px;
+      padding: 6px 20px;
       border-radius: 999px;
       background: rgba(255,255,255,0.13);
       border: 1px solid rgba(255,255,255,0.24);
@@ -159,8 +213,8 @@
     }
 
     .timer {
-      margin-top: 4px;
-      font-size: 12px;
+      margin-top: 2px;
+      font-size: 11px;
       color: #dbeafe;
       font-weight: 500;
       min-height: 18px;
@@ -171,7 +225,7 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: end;
       gap: 10px;
-      min-height: 46px;
+      min-height: 48px;
     }
 
     .ip-section {
@@ -229,8 +283,22 @@
       align-items: center;
     }
 
+    body.ceremony-mode .ip-section,
+    body.ceremony-mode .indicator-wrap,
+    body.ceremony-mode .bottom-right .fullscreen-btn {
+      visibility: hidden;
+    }
+
+    body.ceremony-mode .admin-btn {
+      opacity: 0.18;
+    }
+
+    body.ceremony-mode .admin-btn:hover {
+      opacity: 1;
+    }
+
     .admin-card {
-      width: min(520px, 100%);
+      width: min(560px, 100%);
       border-radius: 28px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.22);
@@ -282,10 +350,20 @@
     .reset-btn { background: #f97316; }
     .test-btn  { background: #16a34a; }
     .off-btn   { background: #dc2626; }
+    .mode-btn  { background: #7c3aed; }
+    .download-btn { background: #0f766e; }
+    .sound-btn { background: #0369a1; }
+    .check-btn { background: #4f46e5; }
 
     .back-btn {
       background: rgba(255,255,255,0.16);
       border: 1px solid rgba(255,255,255,0.28);
+    }
+
+    .admin-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
     .celebration {
@@ -315,13 +393,16 @@
 
     .success-text {
       position: relative;
-      font-size: clamp(38px, 6vw, 82px);
+      font-size: clamp(22px, 3.7vw, 48px);
       font-weight: 800;
       color: white;
       text-shadow:
         0 0 18px rgba(255,255,255,0.9),
         0 0 35px rgba(59,130,246,0.95);
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+      max-width: 1100px;
+      padding: 0 30px;
+      text-align: center;
       animation: zoomText 1.2s ease;
     }
 
@@ -341,6 +422,10 @@
       to { opacity: 1; }
     }
 
+    .capture-hide {
+      visibility: hidden !important;
+    }
+
     #adminPage,
     #adminControls {
       display: none;
@@ -350,7 +435,6 @@
       .main-card {
         padding: 8px 20px 10px;
         gap: 5px;
-        grid-template-rows: 4px auto minmax(0, 1fr) auto auto;
       }
 
       .top-bar {
@@ -362,7 +446,7 @@
       }
 
       h1 {
-        font-size: clamp(21px, 2.55vw, 36px);
+        font-size: clamp(19px, 2.25vw, 31px);
         line-height: 1.13;
       }
 
@@ -371,9 +455,18 @@
         margin-top: 3px;
       }
 
+      .officiant-info {
+        padding: 2px 8px 0;
+        min-height: 22px;
+      }
+
+      .officiant-line {
+        font-size: 11px;
+      }
+
       .signature-inner {
         border-radius: 24px;
-        border-width: 8px;
+        border-width: 10px;
       }
 
       canvas {
@@ -381,7 +474,15 @@
       }
 
       .status-panel {
-        min-height: 48px;
+        min-height: 56px;
+      }
+
+      .countdown-row {
+        height: 32px;
+      }
+
+      .countdown-number {
+        font-size: clamp(24px, 3.8vw, 40px);
       }
 
       .status-pill {
@@ -406,7 +507,7 @@
       .main-card {
         width: 100%;
         height: calc(100dvh - 20px);
-        padding: 10px 14px 10px;
+        padding: 8px 14px 10px;
         border-radius: 24px;
       }
 
@@ -426,6 +527,15 @@
       .ip-section {
         text-align: center;
       }
+
+      .bottom-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .admin-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -434,7 +544,7 @@
 
   <div id="celebration" class="celebration">
     <div class="glow-ring"></div>
-    <div class="success-text">TERIMA KASIH</div>
+    <div class="success-text">TERIMA KASIH, MODE PELANCARAN BUKU DIMULAKAN</div>
   </div>
 
   <section id="mainPage" class="page">
@@ -446,6 +556,7 @@
         <div class="logo-wrap">
           <img
             src="https://raw.githubusercontent.com/ictlshaks-wq/LOGODGURU/main/Logo%20KPM%20Putih.png"
+            crossorigin="anonymous"
             alt="Logo KPM">
         </div>
 
@@ -464,8 +575,18 @@
         </div>
       </div>
 
+      <div class="officiant-info">
+        <div class="officiant-line">
+          Dirasmikan oleh: <strong>YBrs. Encik Zainal bin Abas</strong> &nbsp;|&nbsp;
+          Timbalan Ketua Pengarah Pendidikan Malaysia (Sektor Operasi Sekolah)
+        </div>
+      </div>
+
       <div class="status-panel">
         <div class="status-pill" id="status">Menunggu tandatangan perasmi</div>
+        <div class="countdown-row">
+          <div class="countdown-number" id="countdownNumber">10</div>
+        </div>
         <div class="timer" id="timer">Sistem akan diaktifkan selepas 10 saat tandatangan dikesan</div>
       </div>
 
@@ -480,8 +601,8 @@
         </div>
 
         <div class="bottom-right">
-          <button class="small-btn" onclick="paparanPenuh()">Paparan Penuh</button>
-          <button class="small-btn" onclick="bukaAdmin()">Admin</button>
+          <button class="small-btn fullscreen-btn" onclick="paparanPenuh()">Paparan Penuh</button>
+          <button class="small-btn admin-btn" onclick="bukaAdmin()">Admin</button>
         </div>
       </div>
 
@@ -501,9 +622,19 @@
       <div id="adminControls">
         <input class="admin-input" id="adminIp" value="192.168.201.131">
 
+        <div class="admin-row">
+          <button class="admin-button check-btn" onclick="semakSambungan()">SEMAK SAMBUNGAN</button>
+          <button class="admin-button sound-btn" onclick="ucapTerimaKasih()">TEST SUARA</button>
+        </div>
+
+        <div class="admin-row">
+          <button class="admin-button test-btn" onclick="testLampu()">TEST LAMPU</button>
+          <button class="admin-button off-btn" onclick="matikanLampu()">OFF</button>
+        </div>
+
+        <button class="admin-button mode-btn" id="modeButton" onclick="toggleModeMajlis()">AKTIFKAN MODE MAJLIS</button>
+        <button class="admin-button download-btn" onclick="muatTurunTandatangan()">MUAT TURUN PAPARAN PENUH</button>
         <button class="admin-button reset-btn" onclick="resetMajlis()">RESET MAJLIS</button>
-        <button class="admin-button test-btn" onclick="testLampu()">TEST</button>
-        <button class="admin-button off-btn" onclick="matikanLampu()">OFF</button>
 
         <p class="admin-note" id="adminStatus">Status admin: Sedia</p>
       </div>
@@ -525,12 +656,16 @@
     const adminStatus = document.getElementById("adminStatus");
     const lampDot = document.getElementById("lampDot");
     const celebration = document.getElementById("celebration");
+    const countdownNumber = document.getElementById("countdownNumber");
+    const modeButton = document.getElementById("modeButton");
 
     let isDrawing = false;
     let sudahMula = false;
     let sudahSelesai = false;
     let countdownInterval = null;
     let masaBaki = 10;
+    let strokes = [];
+    let currentStroke = null;
 
     function paparanPenuh() {
       const elem = document.documentElement;
@@ -552,32 +687,47 @@
       }
     }
 
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-
-      let savedImage = null;
-
-      try {
-        if (canvas.width > 0 && canvas.height > 0) {
-          savedImage = canvas.toDataURL();
-        }
-      } catch (e) {}
-
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-
+    function setupContext() {
       ctx.lineWidth = 5;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.strokeStyle = "#0f172a";
+    }
 
-      if (savedImage) {
-        const img = new Image();
-        img.onload = function () {
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
-        img.src = savedImage;
-      }
+    function getCanvasRect() {
+      return canvas.getBoundingClientRect();
+    }
+
+    function clearAndRenderAll() {
+      const rect = getCanvasRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      setupContext();
+
+      strokes.forEach((stroke) => {
+        if (!stroke.points || stroke.points.length === 0) return;
+
+        ctx.beginPath();
+        ctx.moveTo(stroke.points[0].x * rect.width, stroke.points[0].y * rect.height);
+
+        for (let i = 1; i < stroke.points.length; i++) {
+          const p = stroke.points[i];
+          ctx.lineTo(p.x * rect.width, p.y * rect.height);
+        }
+
+        ctx.stroke();
+      });
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.max(window.devicePixelRatio || 1, 1);
+
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      setupContext();
+      clearAndRenderAll();
     }
 
     function syncIP() {
@@ -604,17 +754,32 @@
     function getPosition(e) {
       const rect = canvas.getBoundingClientRect();
 
-      if (e.touches && e.touches.length > 0) {
-        return {
-          x: e.touches[0].clientX - rect.left,
-          y: e.touches[0].clientY - rect.top
-        };
+      let clientX = e.clientX;
+      let clientY = e.clientY;
+
+      if ((clientX === undefined || clientY === undefined) && e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
       }
 
       return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        x: Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)),
+        y: Math.max(0, Math.min(1, (clientY - rect.top) / rect.height))
       };
+    }
+
+    function drawPointNormalized(point, moveOnly = false) {
+      const rect = getCanvasRect();
+      const x = point.x * rect.width;
+      const y = point.y * rect.height;
+
+      if (moveOnly) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
     }
 
     function mulaTandatangan(e) {
@@ -625,9 +790,9 @@
       isDrawing = true;
 
       const pos = getPosition(e);
-
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
+      currentStroke = { points: [pos] };
+      strokes.push(currentStroke);
+      drawPointNormalized(pos, true);
 
       if (!sudahMula) {
         sudahMula = true;
@@ -638,31 +803,49 @@
     function tulisTandatangan(e) {
       e.preventDefault();
 
-      if (!isDrawing || sudahSelesai) return;
+      if (!isDrawing || sudahSelesai || !currentStroke) return;
 
       const pos = getPosition(e);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
+      currentStroke.points.push(pos);
+      drawPointNormalized(pos, false);
     }
 
     function tamatTandatangan(e) {
       e.preventDefault();
       isDrawing = false;
+      currentStroke = null;
+    }
+
+    function showCountdown(value) {
+      countdownNumber.textContent = value;
+      countdownNumber.classList.add("show");
+    }
+
+    function hideCountdown() {
+      countdownNumber.textContent = "";
+      countdownNumber.classList.remove("show");
     }
 
     function mulaKiraanDetik() {
-      masaBaki = 10;
+      if (countdownInterval) return;
 
+      masaBaki = 10;
       statusText.innerText = "Tandatangan dikesan";
       timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
+      showCountdown(masaBaki);
 
       countdownInterval = setInterval(() => {
         masaBaki--;
-        timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
+
+        if (masaBaki > 0) {
+          showCountdown(masaBaki);
+          timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
+        }
 
         if (masaBaki <= 0) {
           clearInterval(countdownInterval);
           countdownInterval = null;
+          hideCountdown();
           selesaiPerasmian();
         }
       }, 1000);
@@ -674,7 +857,7 @@
       sudahSelesai = true;
 
       statusText.innerText = "Perasmian selesai";
-      timerText.innerText = "Terima kasih.";
+      timerText.innerText = "Terima kasih, mode pelancaran buku dimulakan.";
 
       hidupkanLampu();
       ucapTerimaKasih();
@@ -694,7 +877,6 @@
       adminIpInput.value = ip;
 
       const url = "http://" + ip + "/" + arahan + "?t=" + Date.now();
-
       const img = new Image();
 
       img.onload = function () {
@@ -702,7 +884,6 @@
       };
 
       img.onerror = function () {
-        // Walaupun browser baca sebagai error, arahan biasanya sudah sampai ke ESP32.
         if (callback) callback();
       };
 
@@ -715,7 +896,6 @@
       ipInput.value = ip;
 
       const url = "http://" + ip + "/" + arahan + "?t=" + Date.now();
-
       const img = new Image();
 
       img.onload = function () {
@@ -745,12 +925,19 @@
     function testLampu() {
       hantarArahanAdmin("on", function () {
         setLampuIndicator("on");
-        adminStatus.innerText = "Status admin: Test dihantar";
+        adminStatus.innerText = "Status admin: Test lampu dihantar";
+      });
+    }
+
+    function semakSambungan() {
+      hantarArahanAdmin("off", function () {
+        setLampuIndicator("off");
+        adminStatus.innerText = "Status admin: Arahan semak sambungan dihantar. Jika lampu padam/indikator merah, sambungan OK.";
       });
     }
 
     function ucapTerimaKasih() {
-      const suara = new SpeechSynthesisUtterance("Terima kasih.");
+      const suara = new SpeechSynthesisUtterance("Terima kasih, mode pelancaran buku dimulakan.");
       suara.lang = "ms-MY";
       suara.rate = 0.88;
       suara.pitch = 0.92;
@@ -768,6 +955,108 @@
       }, 4300);
     }
 
+    function renderSignatureToCanvas(targetCanvas, width = 2200, height = 800) {
+      targetCanvas.width = width;
+      targetCanvas.height = height;
+      const tctx = targetCanvas.getContext("2d");
+
+      tctx.fillStyle = "#ffffff";
+      tctx.fillRect(0, 0, width, height);
+
+      tctx.lineWidth = 8;
+      tctx.lineCap = "round";
+      tctx.lineJoin = "round";
+      tctx.strokeStyle = "#0f172a";
+
+      strokes.forEach((stroke) => {
+        if (!stroke.points || stroke.points.length === 0) return;
+
+        tctx.beginPath();
+        tctx.moveTo(stroke.points[0].x * width, stroke.points[0].y * height);
+
+        for (let i = 1; i < stroke.points.length; i++) {
+          const p = stroke.points[i];
+          tctx.lineTo(p.x * width, p.y * height);
+        }
+
+        tctx.stroke();
+      });
+    }
+
+    async function muatTurunTandatangan() {
+      if (!strokes.length) {
+        alert("Belum ada tandatangan untuk dimuat turun.");
+        return;
+      }
+
+      adminStatus.innerText = "Status admin: Menjana paparan penuh...";
+
+      // Pastikan paparan utama aktif dan canvas dilukis semula dalam resolusi tinggi
+      const adminPage = document.getElementById("adminPage");
+      const mainPage = document.getElementById("mainPage");
+      adminPage.style.display = "none";
+      mainPage.style.display = "flex";
+      await new Promise(resolve => setTimeout(resolve, 250));
+      resizeCanvas();
+
+      const mainCard = document.querySelector(".main-card");
+      const elementsToHide = document.querySelectorAll(".ip-section, .indicator-wrap, .bottom-right");
+
+      elementsToHide.forEach(el => el.classList.add("capture-hide"));
+
+      try {
+        if (typeof html2canvas === "undefined") {
+          throw new Error("html2canvas tidak dimuatkan");
+        }
+
+        const capturedCanvas = await html2canvas(mainCard, {
+          backgroundColor: null,
+          scale: Math.max(window.devicePixelRatio || 1, 2),
+          useCORS: true,
+          allowTaint: true,
+          logging: false
+        });
+
+        const link = document.createElement("a");
+        link.download = "paparan-penuh-tandatangan-perasmian.png";
+        link.href = capturedCanvas.toDataURL("image/png");
+        link.click();
+
+        adminStatus.innerText = "Status admin: Paparan penuh berjaya dimuat turun.";
+      } catch (err) {
+        // Sandaran: muat turun ruang tandatangan sahaja jika browser sekat capture penuh
+        const exportCanvas = document.createElement("canvas");
+        renderSignatureToCanvas(exportCanvas);
+
+        const link = document.createElement("a");
+        link.download = "tandatangan-perasmian.png";
+        link.href = exportCanvas.toDataURL("image/png");
+        link.click();
+
+        adminStatus.innerText = "Status admin: Browser sekat capture penuh. Tandatangan sahaja dimuat turun.";
+      } finally {
+        elementsToHide.forEach(el => el.classList.remove("capture-hide"));
+
+        // Kembali ke paparan Admin selepas download
+        mainPage.style.display = "none";
+        adminPage.style.display = "flex";
+      }
+    }
+
+    function toggleModeMajlis() {
+      const aktif = document.body.classList.toggle("ceremony-mode");
+
+      if (aktif) {
+        modeButton.innerText = "KELUAR MODE MAJLIS";
+        adminStatus.innerText = "Status admin: Mode Majlis diaktifkan.";
+      } else {
+        modeButton.innerText = "AKTIFKAN MODE MAJLIS";
+        adminStatus.innerText = "Status admin: Mode Majlis dimatikan.";
+      }
+
+      kembaliUtama();
+    }
+
     function resetMajlis() {
       clearInterval(countdownInterval);
       countdownInterval = null;
@@ -776,12 +1065,16 @@
       sudahSelesai = false;
       isDrawing = false;
       masaBaki = 10;
+      currentStroke = null;
+      strokes = [];
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const rect = getCanvasRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      setupContext();
 
       statusText.innerText = "Menunggu tandatangan perasmi";
       timerText.innerText = "Sistem akan diaktifkan selepas 10 saat tandatangan dikesan";
-
+      hideCountdown();
       celebration.style.display = "none";
 
       matikanLampu();
@@ -814,16 +1107,14 @@
       }
     }
 
-    canvas.addEventListener("mousedown", mulaTandatangan);
-    canvas.addEventListener("mousemove", tulisTandatangan);
-    canvas.addEventListener("mouseup", tamatTandatangan);
-    canvas.addEventListener("mouseleave", tamatTandatangan);
-
-    canvas.addEventListener("touchstart", mulaTandatangan, { passive: false });
-    canvas.addEventListener("touchmove", tulisTandatangan, { passive: false });
-    canvas.addEventListener("touchend", tamatTandatangan, { passive: false });
+    canvas.addEventListener("pointerdown", mulaTandatangan);
+    canvas.addEventListener("pointermove", tulisTandatangan);
+    canvas.addEventListener("pointerup", tamatTandatangan);
+    canvas.addEventListener("pointercancel", tamatTandatangan);
+    canvas.addEventListener("pointerleave", tamatTandatangan);
 
     window.addEventListener("load", () => {
+      hideCountdown();
       resizeCanvas();
       syncIP();
       setLampuIndicator("off");
