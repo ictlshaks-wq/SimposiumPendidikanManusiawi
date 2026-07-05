@@ -44,19 +44,17 @@
       border: 1px solid rgba(255,255,255,0.22);
       box-shadow: 0 30px 80px rgba(0,0,0,0.30);
       backdrop-filter: blur(16px);
-      padding: 14px 22px 14px;
+      padding: 10px 22px 12px;
       display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr) auto auto;
-      gap: 8px;
+      grid-template-rows: 6px auto minmax(0, 1fr) auto auto;
+      gap: 6px;
       overflow: hidden;
       position: relative;
     }
 
     .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      min-height: 36px;
+      display: block;
+      min-height: 6px;
     }
 
     .small-btn {
@@ -122,7 +120,7 @@
       min-height: 0;
       background: #ffffff;
       border-radius: 28px;
-      border: 14px solid #ffffff;
+      border: 10px solid #ffffff;
       overflow: hidden;
       display: flex;
       box-shadow:
@@ -142,7 +140,7 @@
 
     .status-panel {
       text-align: center;
-      min-height: 54px;
+      min-height: 42px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -173,7 +171,7 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: end;
       gap: 10px;
-      min-height: 48px;
+      min-height: 46px;
     }
 
     .ip-section {
@@ -226,6 +224,9 @@
 
     .bottom-right {
       justify-self: end;
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
 
     .admin-card {
@@ -347,12 +348,13 @@
 
     @media (max-height: 760px) {
       .main-card {
-        padding: 10px 20px 10px;
-        gap: 6px;
+        padding: 8px 20px 10px;
+        gap: 5px;
+        grid-template-rows: 4px auto minmax(0, 1fr) auto auto;
       }
 
       .top-bar {
-        min-height: 34px;
+        min-height: 4px;
       }
 
       .logo-wrap img {
@@ -371,7 +373,7 @@
 
       .signature-inner {
         border-radius: 24px;
-        border-width: 10px;
+        border-width: 8px;
       }
 
       canvas {
@@ -403,7 +405,7 @@
 
       .main-card {
         width: 100%;
-        height: calc(100vh - 20px);
+        height: calc(100dvh - 20px);
         padding: 10px 14px 10px;
         border-radius: 24px;
       }
@@ -438,9 +440,7 @@
   <section id="mainPage" class="page">
     <div class="main-card">
 
-      <div class="top-bar">
-        <button class="small-btn" onclick="paparanPenuh()">Paparan Penuh</button>
-      </div>
+      <div class="top-bar"></div>
 
       <div class="hero">
         <div class="logo-wrap">
@@ -480,6 +480,7 @@
         </div>
 
         <div class="bottom-right">
+          <button class="small-btn" onclick="paparanPenuh()">Paparan Penuh</button>
           <button class="small-btn" onclick="bukaAdmin()">Admin</button>
         </div>
       </div>
