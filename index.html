@@ -466,7 +466,7 @@
 
       <div class="status-panel">
         <div class="status-pill" id="status">Menunggu tandatangan perasmi</div>
-        <div class="timer" id="timer">Sistem akan diaktifkan selepas 5 saat tandatangan dimulakan</div>
+        <div class="timer" id="timer">Sistem akan diaktifkan selepas 10 saat tandatangan dikesan</div>
       </div>
 
       <div class="bottom-bar">
@@ -529,9 +529,7 @@
     let sudahMula = false;
     let sudahSelesai = false;
     let countdownInterval = null;
-    let tungguSelesaiTimeout = null;
-    let kiraanSudahMula = false;
-    let masaBaki = 5;
+    let masaBaki = 10;
 
     function paparanPenuh() {
       const elem = document.documentElement;
@@ -618,17 +616,12 @@
       };
     }
 
-   function mulaTandatangan(e) {
+    function mulaTandatangan(e) {
       e.preventDefault();
 
-      if (sudahSelesai || kiraanSudahMula) return;
+      if (sudahSelesai) return;
 
       isDrawing = true;
-      clearTimeout(tungguSelesaiTimeout);
-
-      if (canvas.setPointerCapture && e.pointerId !== undefined) {
-        canvas.setPointerCapture(e.pointerId);
-      }
 
       const pos = getPosition(e);
 
@@ -637,15 +630,14 @@
 
       if (!sudahMula) {
         sudahMula = true;
-        statusText.innerText = "Tandatangan sedang direkodkan";
-        timerText.innerText = "Sila lengkapkan tandatangan";
+        mulaKiraanDetik();
       }
     }
 
     function tulisTandatangan(e) {
       e.preventDefault();
 
-      if (!isDrawing || sudahSelesai || kiraanSudahMula) return;
+      if (!isDrawing || sudahSelesai) return;
 
       const pos = getPosition(e);
       ctx.lineTo(pos.x, pos.y);
@@ -654,31 +646,13 @@
 
     function tamatTandatangan(e) {
       e.preventDefault();
-
-      if (!isDrawing || sudahSelesai || kiraanSudahMula) return;
-
       isDrawing = false;
-
-      if (canvas.releasePointerCapture && e.pointerId !== undefined) {
-        try {
-          canvas.releasePointerCapture(e.pointerId);
-        } catch (err) {}
-      }
-
-      clearTimeout(tungguSelesaiTimeout);
-
-      tungguSelesaiTimeout = setTimeout(() => {
-        if (sudahMula && !sudahSelesai && !kiraanSudahMula) {
-          kiraanSudahMula = true;
-          mulaKiraanDetik();
-        }
-      }, 600);
     }
 
     function mulaKiraanDetik() {
-      masaBaki = 5;
+      masaBaki = 10;
 
-      statusText.innerText = "Tandatangan sedang direkodkan";
+      statusText.innerText = "Tandatangan dikesan";
       timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
 
       countdownInterval = setInterval(() => {
@@ -795,21 +769,17 @@
 
     function resetMajlis() {
       clearInterval(countdownInterval);
-      clearTimeout(tungguSelesaiTimeout);
-
       countdownInterval = null;
-      tungguSelesaiTimeout = null;
-      kiraanSudahMula = false;
 
       sudahMula = false;
       sudahSelesai = false;
       isDrawing = false;
-      masaBaki = 5;
+      masaBaki = 10;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       statusText.innerText = "Menunggu tandatangan perasmi";
-      timerText.innerText = "Sistem akan diaktifkan selepas 5 saat tandatangan dimulakan";
+      timerText.innerText = "Sistem akan diaktifkan selepas 10 saat tandatangan dikesan";
 
       celebration.style.display = "none";
 
@@ -843,11 +813,14 @@
       }
     }
 
-    canvas.addEventListener("pointerdown", mulaTandatangan);
-    canvas.addEventListener("pointermove", tulisTandatangan);
-    canvas.addEventListener("pointerup", tamatTandatangan);
-    canvas.addEventListener("pointercancel", tamatTandatangan);
-    canvas.addEventListener("pointerleave", tamatTandatangan);
+    canvas.addEventListener("mousedown", mulaTandatangan);
+    canvas.addEventListener("mousemove", tulisTandatangan);
+    canvas.addEventListener("mouseup", tamatTandatangan);
+    canvas.addEventListener("mouseleave", tamatTandatangan);
+
+    canvas.addEventListener("touchstart", mulaTandatangan, { passive: false });
+    canvas.addEventListener("touchmove", tulisTandatangan, { passive: false });
+    canvas.addEventListener("touchend", tamatTandatangan, { passive: false });
 
     window.addEventListener("load", () => {
       resizeCanvas();
