@@ -528,8 +528,9 @@
     let isDrawing = false;
     let sudahMula = false;
     let sudahSelesai = false;
-    let countdownInterval;
-    let tungguSelesaiTimeout;
+    let countdownInterval = null;
+    let tungguSelesaiTimeout = null;
+    let kiraanSudahMula = false;
     let masaBaki = 5;
 
     function paparanPenuh() {
@@ -618,50 +619,62 @@
     }
 
    function mulaTandatangan(e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  if (sudahSelesai) return;
+      if (sudahSelesai || kiraanSudahMula) return;
 
-  isDrawing = true;
+      isDrawing = true;
+      clearTimeout(tungguSelesaiTimeout);
 
-  clearTimeout(tungguSelesaiTimeout);
+      if (canvas.setPointerCapture && e.pointerId !== undefined) {
+        canvas.setPointerCapture(e.pointerId);
+      }
 
-  const pos = getPosition(e);
+      const pos = getPosition(e);
 
-  ctx.beginPath();
-  ctx.moveTo(pos.x, pos.y);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
 
-  if (!sudahMula) {
-    sudahMula = true;
-    statusText.innerText = "Tandatangan sedang direkodkan";
-    timerText.innerText = "Lepaskan jari atau pen selepas selesai tandatangan";
-  }
-}
+      if (!sudahMula) {
+        sudahMula = true;
+        statusText.innerText = "Tandatangan sedang direkodkan";
+        timerText.innerText = "Sila lengkapkan tandatangan";
+      }
+    }
+
     function tulisTandatangan(e) {
       e.preventDefault();
 
-      if (!isDrawing || sudahSelesai) return;
+      if (!isDrawing || sudahSelesai || kiraanSudahMula) return;
 
       const pos = getPosition(e);
       ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
     }
 
-   function tamatTandatangan(e) {
-  e.preventDefault();
+    function tamatTandatangan(e) {
+      e.preventDefault();
 
-  if (!isDrawing || sudahSelesai) return;
+      if (!isDrawing || sudahSelesai || kiraanSudahMula) return;
 
-  isDrawing = false;
+      isDrawing = false;
 
-  clearTimeout(tungguSelesaiTimeout);
+      if (canvas.releasePointerCapture && e.pointerId !== undefined) {
+        try {
+          canvas.releasePointerCapture(e.pointerId);
+        } catch (err) {}
+      }
 
-  tungguSelesaiTimeout = setTimeout(() => {
-    if (sudahMula && !sudahSelesai && !countdownInterval) {
-      mulaKiraanDetik();
+      clearTimeout(tungguSelesaiTimeout);
+
+      tungguSelesaiTimeout = setTimeout(() => {
+        if (sudahMula && !sudahSelesai && !kiraanSudahMula) {
+          kiraanSudahMula = true;
+          mulaKiraanDetik();
+        }
+      }, 600);
     }
-  }, 800);
-}
+
     function mulaKiraanDetik() {
       masaBaki = 5;
 
@@ -674,6 +687,7 @@
 
         if (masaBaki <= 0) {
           clearInterval(countdownInterval);
+          countdownInterval = null;
           selesaiPerasmian();
         }
       }, 1000);
@@ -781,6 +795,11 @@
 
     function resetMajlis() {
       clearInterval(countdownInterval);
+      clearTimeout(tungguSelesaiTimeout);
+
+      countdownInterval = null;
+      tungguSelesaiTimeout = null;
+      kiraanSudahMula = false;
 
       sudahMula = false;
       sudahSelesai = false;
@@ -824,14 +843,11 @@
       }
     }
 
-    canvas.addEventListener("mousedown", mulaTandatangan);
-    canvas.addEventListener("mousemove", tulisTandatangan);
-    canvas.addEventListener("mouseup", tamatTandatangan);
-    canvas.addEventListener("mouseleave", tamatTandatangan);
-
-    canvas.addEventListener("touchstart", mulaTandatangan, { passive: false });
-    canvas.addEventListener("touchmove", tulisTandatangan, { passive: false });
-    canvas.addEventListener("touchend", tamatTandatangan, { passive: false });
+    canvas.addEventListener("pointerdown", mulaTandatangan);
+    canvas.addEventListener("pointermove", tulisTandatangan);
+    canvas.addEventListener("pointerup", tamatTandatangan);
+    canvas.addEventListener("pointercancel", tamatTandatangan);
+    canvas.addEventListener("pointerleave", tamatTandatangan);
 
     window.addEventListener("load", () => {
       resizeCanvas();
