@@ -529,6 +529,7 @@
     let sudahMula = false;
     let sudahSelesai = false;
     let countdownInterval;
+    let tungguSelesaiTimeout;
     let masaBaki = 5;
 
     function paparanPenuh() {
@@ -616,24 +617,26 @@
       };
     }
 
-    function mulaTandatangan(e) {
-      e.preventDefault();
+   function mulaTandatangan(e) {
+  e.preventDefault();
 
-      if (sudahSelesai) return;
+  if (sudahSelesai) return;
 
-      isDrawing = true;
+  isDrawing = true;
 
-      const pos = getPosition(e);
+  clearTimeout(tungguSelesaiTimeout);
 
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
+  const pos = getPosition(e);
 
-      if (!sudahMula) {
-        sudahMula = true;
-        mulaKiraanDetik();
-      }
-    }
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
 
+  if (!sudahMula) {
+    sudahMula = true;
+    statusText.innerText = "Tandatangan sedang direkodkan";
+    timerText.innerText = "Lepaskan jari atau pen selepas selesai tandatangan";
+  }
+}
     function tulisTandatangan(e) {
       e.preventDefault();
 
@@ -644,11 +647,21 @@
       ctx.stroke();
     }
 
-    function tamatTandatangan(e) {
-      e.preventDefault();
-      isDrawing = false;
-    }
+   function tamatTandatangan(e) {
+  e.preventDefault();
 
+  if (!isDrawing || sudahSelesai) return;
+
+  isDrawing = false;
+
+  clearTimeout(tungguSelesaiTimeout);
+
+  tungguSelesaiTimeout = setTimeout(() => {
+    if (sudahMula && !sudahSelesai && !countdownInterval) {
+      mulaKiraanDetik();
+    }
+  }, 800);
+}
     function mulaKiraanDetik() {
       masaBaki = 5;
 
