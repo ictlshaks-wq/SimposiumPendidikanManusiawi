@@ -671,7 +671,7 @@
     let sudahMula = false;
     let sudahSelesai = false;
     let countdownInterval = null;
-    let masaBaki = 10;
+    let masaBaki = 7;
     let strokes = [];
     let currentStroke = null;
 
@@ -837,7 +837,7 @@
     function mulaKiraanDetik() {
       if (countdownInterval) return;
 
-      masaBaki = 10;
+      masaBaki = 7;
       statusText.innerText = "Tandatangan dikesan";
       timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
       showCountdown(masaBaki);
@@ -1072,7 +1072,7 @@
       sudahMula = false;
       sudahSelesai = false;
       isDrawing = false;
-      masaBaki = 10;
+      masaBaki = 7;
       currentStroke = null;
       strokes = [];
 
