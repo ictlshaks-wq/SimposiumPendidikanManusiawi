@@ -595,7 +595,7 @@
         <div class="countdown-row">
           <div class="countdown-number" id="countdownNumber">7</div>
         </div>
-        <div class="timer" id="timer">Sistem akan diaktifkan selepas 7 saat tandatangan dikesan</div>
+        <div class="timer" id="timer">Sistem akan diaktifkan selepas 6 saat tandatangan dikesan</div>
       </div>
 
       <div class="bottom-bar">
@@ -671,7 +671,7 @@
     let sudahMula = false;
     let sudahSelesai = false;
     let countdownInterval = null;
-    let masaBaki = 7;
+    let masaBaki = 6;
     let strokes = [];
     let currentStroke = null;
 
@@ -837,7 +837,7 @@
     function mulaKiraanDetik() {
       if (countdownInterval) return;
 
-      masaBaki = 7;
+      masaBaki = 6;
       statusText.innerText = "Tandatangan dikesan";
       timerText.innerText = "Sistem akan diaktifkan dalam " + masaBaki + " saat";
       showCountdown(masaBaki);
@@ -1072,7 +1072,7 @@
       sudahMula = false;
       sudahSelesai = false;
       isDrawing = false;
-      masaBaki = 7;
+      masaBaki = 6;
       currentStroke = null;
       strokes = [];
 
